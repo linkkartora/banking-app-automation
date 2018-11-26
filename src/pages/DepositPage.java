@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class DepositPage {
 	protected WebDriver driver;
 	private int amount = 50000;
-	private String description = "This is description";
+	private String description = "Description";
 	private String headingTransaction = "Transaction details of Deposit for Account ";
 	
 	public DepositPage(WebDriver driver) {
