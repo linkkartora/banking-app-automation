@@ -1,7 +1,5 @@
 package pages;
 
-import static org.junit.Assert.assertTrue;
-
 import java.util.ArrayList;
 
 import org.openqa.selenium.WebDriver;
@@ -19,7 +17,7 @@ public class CustomerPage {
 	private String stage = "Ho Chi Minh";
 	private String pinNo = "700000";
 	private String phoneNo = "0123456789";
-	private String email = "AutomationTeam_975@yopmail.com";
+	private String email = "AutomationTeam_973@yopmail.com";
 	private String password = "abc123";
 	private String gender;
 	private String customerCreated = "Customer Registered Successfully!!!";
@@ -35,7 +33,87 @@ public class CustomerPage {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
+	//get set value
+	public String getCustomerCreated() {
+		return customerCreated;
+	}
+
+	public void setCustomerCreated(String customerCreated) {
+		this.customerCreated = customerCreated;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGender() {
+		return femaleRadio.getText();
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getVerifiedDob() {
+		return verifiedDob;
+	}
+
+	public void setVerifiedDob(String verifiedDob) {
+		this.verifiedDob = verifiedDob;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getStage() {
+		return stage;
+	}
+
+	public void setStage(String stage) {
+		this.stage = stage;
+	}
+
+	public String getPinNo() {
+		return pinNo;
+	}
+
+	public void setPinNo(String pinNo) {
+		this.pinNo = pinNo;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	//define element
 	//input page
@@ -117,44 +195,32 @@ public class CustomerPage {
 		try {
 			//create data
 			dob = String.valueOf(month) + String.valueOf(date) + String.valueOf(year);
-			verifiedDob = String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(date);
-			gender = femaleRadio.getText();
-			
+			setVerifiedDob(String.valueOf(year) + "-" + String.valueOf(month) + "-" + String.valueOf(date));
+			gender = getGender();
 			//fill data
 			System.out.println("Fill data");
-			nameTxb.sendKeys(name);
+			nameTxb.sendKeys(getName());
 			femaleRadio.click();
 			dateOfBirth.sendKeys(dob);
-			addressTxa.sendKeys(address);
-			cityTxb.sendKeys(city);
-			stateTxb.sendKeys(stage);
-			pinTxb.sendKeys(pinNo);
-			phoneTxb.sendKeys(phoneNo);
-			emailTxb.sendKeys(email);
+			addressTxa.sendKeys(getAddress());
+			cityTxb.sendKeys(getCity());
+			stateTxb.sendKeys(getStage());
+			pinTxb.sendKeys(getPinNo());
+			phoneTxb.sendKeys(getPhoneNo());
+			emailTxb.sendKeys(getEmail());
 			passwordTxb.sendKeys(password);
 			
 			//click the submit button
 			System.out.println("Click the submit button");
 			submitBtn.click();
 			
-			//check the created page
-			assertTrue("Customer created succesfully", customerStatusLbl.getText().contains(customerCreated));
-			assertTrue("Name is correctedly input with value " + name, customerNameLbl.getText().contains(name));
-			assertTrue("Gender is correctedly selected with value " + gender, genderLbl.getText().contains(gender));
-			assertTrue("Birthday is correctedly input with value " + verifiedDob, birthdayLbl.getText().contains(verifiedDob));
-			assertTrue("Address is correctedly input with value " + address, addressLbl.getText().contains(address));
-			assertTrue("City is correctedly input with value " + city, cityLbl.getText().contains(city));
-			assertTrue("State is correctedly input with value " + stage, stateLbl.getText().contains(stage));
-			assertTrue("Pin is correctedly input with value " + pinNo, pinLbl.getText().contains(pinNo));
-			assertTrue("Mobile No. is correctedly input with value " + phoneNo, phoneLbl.getText().contains(phoneNo));
-			assertTrue("Email is correctedly input with value " + email, emailLbl.getText().contains(email));
-			
 			//provide data for account acction
 			customerId = customerIdLbl.getText();
 			System.out.println("New customer Id is: " + customerId);
 			customerInformation.add(customerId);
-			customerInformation.add(name);
-			customerInformation.add(email);
+			customerInformation.add(getName());
+			customerInformation.add(getEmail());
+			customerInformation.add(gender);
 			
 			return customerInformation;
 		} catch (Exception e) {

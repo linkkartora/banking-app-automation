@@ -1,5 +1,4 @@
 package pages;
-import static org.junit.Assert.assertTrue;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,8 +8,32 @@ import org.openqa.selenium.support.PageFactory;
 public class DepositPage {
 	protected WebDriver driver;
 	private int amount = 50000;
-	private String description = "This is description";
+	private String description = "Description";
 	private String headingTransaction = "Transaction details of Deposit for Account ";
+	
+	public int getAmount() {
+		return amount;
+	}
+
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getHeadingTransaction() {
+		return headingTransaction;
+	}
+
+	public void setHeadingTransaction(String headingTransaction) {
+		this.headingTransaction = headingTransaction;
+	}
 	
 	public DepositPage(WebDriver driver) {
 		this.driver = driver;
@@ -48,20 +71,18 @@ public class DepositPage {
 	public WebElement descriptionLbl;
 	
 	public void addNewDeposit(String accountId) {
-		//Fill the add deposit form
-		System.out.println("Fill the deposit form");
-		accountIdTxt.sendKeys(accountId);
-		amountTxt.sendKeys(String.valueOf(amount));
-		descriptionTxt.sendKeys(description);
-		
-		//click the submit btn
-		System.out.println("Click the submit button");
-		submitBtn.click();
-		
-		//check the created page
-		assertTrue("Heading transaction is exit with corresponding account Id", depositStatusLbl.getText().contains(headingTransaction + accountId));
-		assertTrue("Account number is correctedly input with value " + accountId, accountIdLbl.getText().contains(accountId));
-		assertTrue("Amount Credited is correctedly selected with value " + amount, amoutLbl.getText().contains(String.valueOf(amount)));
-		assertTrue("Description is correctedly input with value " + description, descriptionLbl.getText().contains(description));
+		try {
+			//Fill the add deposit form
+			System.out.println("Fill the deposit form");
+			accountIdTxt.sendKeys(accountId);
+			amountTxt.sendKeys(String.valueOf(getAmount()));
+			descriptionTxt.sendKeys(getDescription());
+			
+			//click the submit btn
+			System.out.println("Click the submit button");
+			submitBtn.click();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

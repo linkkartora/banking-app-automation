@@ -1,5 +1,4 @@
 package pages;
-import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -60,12 +59,10 @@ public class AccountPage {
 		try {
 			//get data from customer information
 			String customerId = customerInformation.get(0);
-			String customerName = customerInformation.get(1);
-			String email = customerInformation.get(2);
 			
 			//fill values
-			System.out.println("Fill the data with customer Id is: " + customerInformation.get(0));
-			customerIdTxt.sendKeys(customerInformation.get(0));
+			System.out.println("Fill the data with customer Id is: " + customerId);
+			customerIdTxt.sendKeys(customerId);
 			Select selectValue = new Select(accountBox);
 			selectValue.selectByValue(accountType);
 			depositTxt.sendKeys(String.valueOf(deposit));
@@ -73,12 +70,6 @@ public class AccountPage {
 			//click the submit button
 			System.out.println("Click the submit button");
 			submitBtn.click();
-			
-			//Verify coressponding value
-			assertTrue("Account generated succesfully", accountStatusLbl.getText().contains(accountGenMess));
-			assertTrue("Customer Id is correctedly input with value " + customerId, customerIdLbl.getText().contains(customerId));
-			assertTrue("Customer name is correctedly input with value " + customerName, customerNameLbl.getText().contains(customerName));
-			assertTrue("Email is correctedly input with value " + email, emailLbl.getText().contains(email));
 			
 			//return the account Id for Deposit Method
 			accountId = accountIdLbl.getText();
@@ -88,5 +79,13 @@ public class AccountPage {
 			return null;
 			// TODO: handle exception
 		}
+	}
+
+	public String getAccountGenMess() {
+		return accountGenMess;
+	}
+
+	public void setAccountGenMess(String accountGenMess) {
+		this.accountGenMess = accountGenMess;
 	}
 }
